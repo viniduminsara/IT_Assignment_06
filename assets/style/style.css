@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Prompt&display=swap');
+
+:root{
+    --primary: linear-gradient(90deg, #2CC56F 6.54%, #BEDC7C 92.06%);
+    --font-color: #344767;
+    --secondary-font-color: #C7C7C7;
+}
+
+body{
+    font-family: "Prompt", sans-serif;
+    background: #F8F8F8;
+}
+
+.navbar{
+    background-color: #ffffff;
+}
+
+.logo{
+    font-family: "Krona One", sans-serif;
+    background: var(--primary);
+    color: transparent;
+    -webkit-background-clip: text;
+    font-size: 36px;
+    font-weight: 700;
+    margin-right: 80px;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.nav-item{
+    margin: 0 10px;
+}
+
+.nav-link{
+    color: var(--secondary-font-color);
+}
+
+.active-page{
+    background: var(--primary);
+    color: transparent;
+    -webkit-background-clip: text;
+    position: relative;
+}
+
+.active-page:after{
+    content: '';
+    position: absolute;
+    left: 10%;
+    bottom: 0px;
+    width: 80%;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 30px;
+}
