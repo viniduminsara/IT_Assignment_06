@@ -100,8 +100,7 @@ body{
 }
 
 .chart-card div{
-    height: 280px;
-    width: 500px;
+    width: 550px;
 }
 
 .image-container{
@@ -111,4 +110,22 @@ body{
 .image-class{
     width: 368px;
     height: 332px;
+}
+
+@media all and (max-width: 992px) {
+    .chart-card div{
+        width: 300px;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .chart-card div{
+        width: 450px;
+    }
+}
+
+@media all and (max-width: 576px) {
+    .chart-card{
+        display: none;
+    }
 }
