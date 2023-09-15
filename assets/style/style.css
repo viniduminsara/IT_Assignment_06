@@ -53,6 +53,15 @@ body{
     border-radius: 30px;
 }
 
+section{
+    width: 100%;
+    height: 100vh;
+}
+
+#home{
+    margin-top: 100px;
+}
+
 .card{
     height: 180px;
     box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.03);
@@ -112,6 +121,33 @@ body{
     height: 332px;
 }
 
+.header{
+    color: var(--font-color);
+    margin-top: 100px;
+}
+
+
+.search{
+    position: relative;
+}
+
+.search input{
+    height: 50px;
+    width: 300px;
+    text-indent: 30px;
+    display: inline;
+}
+
+.search .fa-magnifying-glass{
+    position: absolute;
+    top: 18px;
+    left: 16px;
+}
+
+.btn-primary{
+    height: 50px;
+}
+
 @media all and (max-width: 992px) {
     .chart-card div{
         width: 300px;
@@ -126,6 +162,10 @@ body{
 
 @media all and (max-width: 576px) {
     .chart-card{
+        display: none;
+    }
+
+    .image-class{
         display: none;
     }
 }

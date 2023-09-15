@@ -15,10 +15,11 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-md">
+    <nav class="navbar navbar-expand-md fixed-top">
         <div class="container-fluid">
             <div class="logo">POS</div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse container-fluid" id="navbarNav">
@@ -27,7 +28,7 @@
                         <a class="nav-link active-page" aria-current="page" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Customers</a>
+                        <a class="nav-link" href="#customer">Customers</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Items</a>
@@ -42,9 +43,10 @@
 </header>
 <main>
 
+    <!-- home section -->
     <section id="home">
         <div class="container">
-            <div class="row mt-5">
+            <div class="row">
 
                 <div class="col col-lg-4 col-md-4 col-sm-6 col-12 mb-3">
                     <div class="card">
@@ -52,7 +54,7 @@
                             <h3 class="card-title">Customers</h3>
                             <p class="count">125</p>
                             <i class="fa-solid fa-user fa-2xl"></i>
-                            <a class="link-page" href="#">Manage Customers ></a>
+                            <a class="link-page" href="#customer">Manage Customers ></a>
                         </div>
                     </div>
                 </div>
@@ -93,6 +95,75 @@
 
                 <div class="col col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
                     <img src="assets/img/Charts-image.png" class="image-class" alt="image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- customer form -->
+    <section id="customer">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col">
+                    <h3 class="header">Manage Customer</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-6 col-md-12 col-sm-12">
+                    <form>
+                        <div class="mb-3">
+                            <label for="customerId" class="form-label">Customer Id</label>
+                            <input type="number" class="form-control" id="customerId">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fullname" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="fullname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea class="form-control" id="address" style="height: 100px"></textarea>
+                        </div>
+                        <div class="mt-3">
+                            <button type="submit" class="btn btn-outline-success">Submit</button>
+                            <button type="button" class="btn btn-outline-warning">Update</button>
+                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                            <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col col-lg-6 col-md-12 col-sm-12 d-flex flex-column align-items-end">
+                    <div class="search mb-4 mt-4">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" class="form-control" placeholder="Search">
+                        <button class="btn btn-outline-primary" style="height: 50px">Search</button>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Customer Id</th>
+                            <th scope="col">Full Name</th>
+                            <th scope="col">Address</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Vinidu</td>
+                            <td>Kalutara</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Vimukthi</td>
+                            <td>Piliyandala</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Nipuna</td>
+                            <td>Mathugama</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
