@@ -95,7 +95,7 @@ section{
 }
 
 .chart-card{
-    height: 350px;
+    height: fit-content;
     box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.03);
     border: none;
     border-radius: 30px;
@@ -158,14 +158,14 @@ section{
     .chart-card div{
         width: 450px;
     }
+
+    .image-class{
+        display: none;
+    }
 }
 
 @media all and (max-width: 576px) {
     .chart-card{
-        display: none;
-    }
-
-    .image-class{
         display: none;
     }
 }
