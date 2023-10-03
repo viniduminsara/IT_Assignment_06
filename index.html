@@ -34,7 +34,7 @@
                         <a class="nav-link" href="#item">Items</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Orders</a>
+                        <a class="nav-link" href="#order">Orders</a>
                     </li>
                 </ul>
             </div>
@@ -76,7 +76,7 @@
                             <h3 class="card-title">Orders</h3>
                             <p class="count">56</p>
                             <i class="fa-solid fa-cart-shopping fa-2xl"></i>
-                            <a class="link-page" href="#">Manage Orders ></a>
+                            <a class="link-page" href="#order">Manage Orders ></a>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
         </div>
     </section>
 
-    <!-- customer form -->
+    <!-- customer section -->
     <section id="customer">
         <div class="container">
             <div class="row mb-5">
@@ -158,7 +158,7 @@
                             <td>Piliyandala</td>
                         </tr>
                         <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">3</th>
                             <td>Nipuna</td>
                             <td>Mathugama</td>
                         </tr>
@@ -169,7 +169,7 @@
         </div>
     </section>
 
-    <!-- item form -->
+    <!-- item section -->
     <section id="item">
         <div class="container">
             <div class="row mb-5">
@@ -234,13 +234,95 @@
                             <td>30</td>
                         </tr>
                         <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">3</th>
                             <td>Toffee</td>
                             <td>5.00</td>
                             <td>120</td>
                         </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- order section -->
+    <section id="order">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col">
+                    <h3 class="header">Manage Orders</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
+                    <form>
+                        <div class="mb-3">
+                            <label for="orderId" class="form-label">Order ID</label>
+                            <input type="number" class="form-control" id="orderId">
+                        </div>
+                        <div class="mb-3">
+                            <label for="customer_Id" class="form-label">Customer Id</label>
+                            <select class="form-select" aria-label="Default select example" id="customer_Id">
+                                <option selected>select the customer</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Unit Price</label>
+                            <input type="date" class="form-control" id="date">
+                        </div>
+                        <div class="mt-5">
+                            <button type="button" class="btn btn-outline-warning">Update</button>
+                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                            <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column align-items-end">
+                    <div class="search mb-4 mt-4">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" class="form-control" placeholder="Search">
+                        <button class="btn btn-outline-primary" style="height: 50px">Search</button>
+                        <a href="#place_order">
+                            <button class="btn btn-primary" style="height: 50px">Place Order</button>
+                        </a>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Order Id</th>
+                            <th scope="col">Customer Id</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>1</td>
+                            <td>2023/09/30</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>2</td>
+                            <td>2023/10/03</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>1</td>
+                            <td>2023/10/05</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="place_order">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col">
+                    <h3 class="header">Place Order</h3>
                 </div>
             </div>
         </div>

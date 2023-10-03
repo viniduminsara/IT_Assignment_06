@@ -10,6 +10,7 @@
 body{
     font-family: "Prompt", sans-serif;
     background: #F8F8F8;
+    overflow-y: hidden;
 }
 
 .navbar{
