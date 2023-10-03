@@ -10,7 +10,6 @@
 body{
     font-family: "Prompt", sans-serif;
     background: #F8F8F8;
-    overflow-y: hidden;
 }
 
 .navbar{
@@ -147,6 +146,22 @@ section{
 
 .btn-primary{
     height: 50px;
+}
+
+.place_order{
+    background: var(--primary);
+    border: none;
+}
+
+.order_container{
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.03);
+}
+
+.order_container div{
+    margin: 10px;
 }
 
 @media all and (max-width: 992px) {

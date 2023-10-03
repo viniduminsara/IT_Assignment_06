@@ -268,7 +268,7 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="date" class="form-label">Unit Price</label>
+                            <label for="date" class="form-label">Date</label>
                             <input type="date" class="form-control" id="date">
                         </div>
                         <div class="mt-5">
@@ -285,7 +285,7 @@
                         <input type="text" class="form-control" placeholder="Search">
                         <button class="btn btn-outline-primary" style="height: 50px">Search</button>
                         <a href="#place_order">
-                            <button class="btn btn-primary" style="height: 50px">Place Order</button>
+                            <button class="btn btn-primary place_order">Place Order</button>
                         </a>
                     </div>
                     <table class="table">
@@ -323,6 +323,65 @@
             <div class="row mb-5">
                 <div class="col">
                     <h3 class="header">Place Order</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-7">
+                    <div class="order_container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div>
+                                        <label for="order_Id" class="form-label">Order ID</label>
+                                        <input type="number" class="form-control" id="order_Id">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <label for="custId" class="form-label">Customer Id</label>
+                                        <select class="form-select" aria-label="Default select example" id="custId">
+                                            <option selected>select the customer</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <label for="orderDate" class="form-label">Date</label>
+                                        <input type="date" class="form-control" id="orderDate">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order_container mt-4">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div>
+                                        <label for="item_Id" class="form-label">Item Id</label>
+                                        <select class="form-select" aria-label="Default select example" id="item_Id">
+                                            <option selected>select the item</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="qtyOnHand" class="form-label">Qty On Hand</label>
+                                        <input type="number" class="form-control" id="qtyOnHand">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <label for="desc" class="form-label">Item Description</label>
+                                        <input type="text" class="form-control" id="desc">
+                                    </div>
+                                    <div>
+                                        <label for="quantity" class="form-label">Qty</label>
+                                        <input type="number" class="form-control" id="quantity">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
