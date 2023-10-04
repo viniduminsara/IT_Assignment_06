@@ -196,6 +196,10 @@ section{
 }
 
 @media all and (max-width: 768px) {
+    section{
+        height: 150vh;
+    }
+
     .chart-card div{
         width: 450px;
     }
