@@ -318,9 +318,11 @@
             </div>
         </div>
     </section>
+
+    <!-- place order section -->
     <section id="place_order">
         <div class="container">
-            <div class="row mb-5">
+            <div class="row mb-4">
                 <div class="col">
                     <h3 class="header">Place Order</h3>
                 </div>
@@ -329,6 +331,7 @@
                 <div class="col-7">
                     <div class="order_container">
                         <div class="container">
+                            <h4>Invoice Details</h4>
                             <div class="row">
                                 <div class="col">
                                     <div>
@@ -354,8 +357,9 @@
                         </div>
                     </div>
 
-                    <div class="order_container mt-4">
+                    <div class="order_container mt-3">
                         <div class="container">
+                            <h4>Item Select</h4>
                             <div class="row">
                                 <div class="col">
                                     <div>
@@ -378,6 +382,55 @@
                                         <label for="quantity" class="form-label">Qty</label>
                                         <input type="number" class="form-control" id="quantity">
                                     </div>
+                                </div>
+                                <div class="row justify-content-end mt-3">
+                                    <button class="cart_btn">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-5">
+                    <div class="order_container">
+                        <div class="container">
+                            <h4>Cart</h4>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Item Id</th>
+                                    <th scope="col">Unit Price</th>
+                                    <th scope="col">Qty</th>
+                                </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="order_container mt-3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div>
+                                        <label for="discount" class="form-label">Discount</label>
+                                        <input type="number" class="form-control" id="discount">
+                                    </div>
+                                    <div>
+                                        <label for="cash" class="form-label">Cash</label>
+                                        <input type="number" class="form-control" id="cash">
+                                    </div>
+                                    <div class="net_total">
+                                        <span>Net Total : </span>
+                                        <span>0/=</span>
+                                    </div>
+                                    <div class="sub_total">
+                                        <span>Sub Total : </span>
+                                        <span>0/=</span>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center mt-3">
+                                    <button class="order_btn">Place Order</button>
                                 </div>
                             </div>
                         </div>

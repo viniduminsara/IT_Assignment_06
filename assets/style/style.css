@@ -157,11 +157,36 @@ section{
     background: #ffffff;
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.03);
+    box-shadow: 0 20px 40px 0 rgba(0, 0, 0, 0.12);
 }
 
-.order_container div{
-    margin: 10px;
+.order_container .container .row .col div{
+    margin: 15px;
+}
+
+.order_container .container h4{
+    color: var(--font-color);
+}
+
+.cart_btn{
+    width: fit-content;
+    background: #ef233c;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+}
+
+#discount, #cash{
+    width: fit-content;
+}
+
+.order_btn{
+    background: #57cc99;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
 }
 
 @media all and (max-width: 992px) {
