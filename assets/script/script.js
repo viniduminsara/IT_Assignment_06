@@ -1,3 +1,51 @@
+// navigation
+$('#customer').css('display','none');
+$('#item').css('display','none');
+$('#order').css('display','none');
+$('#place_order').css('display','none');
+
+$('#home_nav').on('click', () => {
+    $('#home').css('display', 'block');
+    $('#customer').css('display', 'none');
+    $('#item').css('display', 'none');
+    $('#order').css('display', 'none');
+    $('#place_order').css('display', 'none');
+});
+
+$('#customer_nav, #customer_link').on('click', () => {
+    $('#home').css('display', 'none');
+    $('#customer').css('display', 'block');
+    $('#item').css('display', 'none');
+    $('#order').css('display', 'none');
+    $('#place_order').css('display', 'none');
+});
+
+$('#item_nav, #item_link').on('click', () => {
+    $('#home').css('display', 'none');
+    $('#customer').css('display', 'none');
+    $('#item').css('display', 'block');
+    $('#order').css('display', 'none');
+    $('#place_order').css('display', 'none');
+});
+
+$('#order_nav, #order_link').on('click', () => {
+    $('#home').css('display', 'none');
+    $('#customer').css('display', 'none');
+    $('#item').css('display', 'none');
+    $('#order').css('display', 'block');
+    $('#place_order').css('display', 'none');
+});
+
+$('#place_order_btn').on('click', () => {
+    $('#home').css('display', 'none');
+    $('#customer').css('display', 'none');
+    $('#item').css('display', 'none');
+    $('#order').css('display', 'none');
+    $('#place_order').css('display', 'block');
+});
+
+
+
 // Get the canvas element
 const ctx = document.getElementById('lineChart').getContext('2d');
 
@@ -29,60 +77,3 @@ const myChart = new Chart(ctx, {
     options: options
 });
 myChart.update();
-
-//customer form
-
-const customer_Id = $('#customerId');
-const full_name = $('#fullname');
-const address = $('#address');
-
-const customer_submit = $('#customer_submit');
-const customer_update = $('#customer_update');
-const customer_delete = $('#customer_delete');
-const customerReset = $("button[type = 'reset']").eq(0);
-
-customer_submit.on('click', () => {
-    let customerId = customer_Id.val().trim();
-    let fullName = full_name.val().trim();
-    let addressVal = address.val().trim();
-
-    $('tbody').eq(0).append(
-        `<tr>
-            <th scope="row">${customerId}</th>
-            <td>${fullName}</td>
-            <td>${addressVal}</td>
-         </tr>`
-    );
-    customerReset.click();
-});
-
-customer_update.on('click', () => {
-    let customerId = customer_Id.val().trim();
-    let fullName = full_name.val().trim();
-    let addressVal = address.val().trim();
-
-    $('tbody').eq(0).find('tr').each(function() {
-
-        let cust_Id = $(this).find('th').text();
-
-        if (cust_Id === customerId) {
-            $(this).find('td:nth-child(2)').text(fullName);
-            $(this).find('td:nth-child(3)').text(addressVal);
-            customerReset.click();
-        }
-    });
-});
-
-customer_delete.on('click', () => {
-    let customerId = customer_Id.val().trim();
-
-    $('tbody').eq(0).find('tr').each(function() {
-
-        let cust_Id = $(this).find('th').text();
-
-        if (cust_Id === customerId) {
-            $(this).remove();
-            customerReset.click();
-        }
-    });
-});
