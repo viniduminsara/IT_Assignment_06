@@ -121,7 +121,11 @@
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <textarea class="form-control" id="address" style="height: 100px"></textarea>
+                                <textarea class="form-control" id="address" style="height: 65px"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="salary" class="form-label">Salary</label>
+                                <input type="number" class="form-control" id="salary">
                             </div>
                             <div id="customer_btn" class="mt-5">
                                 <button type="button" class="btn btn-outline-success">Submit</button>
@@ -132,11 +136,15 @@
                         </form>
                     </div>
 
-                    <div class="col col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column align-items-end">
-                        <div class="search mb-4 mt-4">
+                    <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div id="customer_search" class="search mb-4 mt-4 d-flex flex-row align-items-end">
                             <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" class="form-control" placeholder="Search">
-                            <button class="btn btn-outline-primary" style="height: 50px">Search</button>
+                            <input type="search" class="form-control" placeholder="Search">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>customer_id</option>
+                                <option>name</option>
+                                <option>salary</option>
+                            </select>
                         </div>
                         <table class="table">
                             <thead>
@@ -144,6 +152,7 @@
                                 <th scope="col">Customer Id</th>
                                 <th scope="col">Full Name</th>
                                 <th scope="col">Address</th>
+                                <th scope="col">Salary</th>
                             </tr>
                             </thead>
                             <tbody></tbody>

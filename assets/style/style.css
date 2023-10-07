@@ -154,6 +154,16 @@ section:first-child{
     height: 50px;
 }
 
+/*#customer_search {*/
+/*    width: 100%;*/
+/*}*/
+
+#customer_search select{
+    width: 125px;
+    height: 50px;
+    margin-left: 20px;
+}
+
 .place_order{
     background: var(--primary);
     border: none;
