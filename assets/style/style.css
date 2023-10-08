@@ -172,7 +172,7 @@ td, th[scope = 'row']{
     height: 50px;
 }
 
-#customer_search select{
+.search select{
     width: 125px;
     height: 50px;
     margin-left: 20px;

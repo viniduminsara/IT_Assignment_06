@@ -1,5 +1,5 @@
-import {CustomerModel} from '/model/customerModel.js';
-import {customer_db} from '/db/db.js';
+import {CustomerModel} from "../model/customerModel.js";
+import {customer_db} from "../db/db.js";
 
 //customer form
 const customer_Id = $('#customerId');
@@ -8,7 +8,7 @@ const address = $('#address');
 const salary = $('#salary');
 const customer_btn = $('#customer_btn button');
 const  customer_search = $('#customer_search input');
-const  search_select = $('#customer_search select');
+const  customer_search_select = $('#customer_search select');
 
 //add customer
 customer_btn.eq(0).on('click', () => {
@@ -68,7 +68,7 @@ customer_btn.eq(2).on('click', () => {
 
 //customer search
 customer_search.on('input', function() {
-    let option = search_select.find(":selected").text();
+    let option = customer_search_select.find(":selected").text();
     let searchTerm = customer_search.val().trim();
     let matchingCustomers = customer_db.filter(customer => customer[option] === searchTerm);
 

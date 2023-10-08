@@ -177,8 +177,8 @@
                     <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
                         <form>
                             <div class="mb-3">
-                                <label for="itemId" class="form-label">Item Id</label>
-                                <input type="number" class="form-control" id="itemId">
+                                <label for="itemCode" class="form-label">Item Code</label>
+                                <input type="number" class="form-control" id="itemCode">
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description</label>
@@ -186,14 +186,14 @@
                             </div>
                             <div class="mb-3">
                                 <label for="unitPrice" class="form-label">Unit Price</label>
-                                <input type="number" class="form-control" id="unitPrice">
+                                <input type="text" class="form-control" id="unitPrice">
                             </div>
                             <div class="mb-3">
                                 <label for="qty" class="form-label">Qty</label>
                                 <input type="number" class="form-control" id="qty">
                             </div>
-                            <div class="mt-5">
-                                <button type="submit" class="btn btn-outline-success">Submit</button>
+                            <div id="item_btn" class="mt-5">
+                                <button type="button" class="btn btn-outline-success">Submit</button>
                                 <button type="button" class="btn btn-outline-warning">Update</button>
                                 <button type="button" class="btn btn-outline-danger">Delete</button>
                                 <button type="reset" class="btn btn-outline-secondary">Reset</button>
@@ -201,16 +201,19 @@
                         </form>
                     </div>
 
-                    <div class="col col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column align-items-end">
-                        <div class="search mb-4 mt-4">
+                    <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
+                        <div id="item_search" class="search mb-4 mt-4  d-flex flex-row align-items-end">
                             <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" class="form-control" placeholder="Search">
-                            <button class="btn btn-outline-primary" style="height: 50px">Search</button>
+                            <input type="search" class="form-control" placeholder="Search">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>item_code</option>
+                                <option>description</option>
+                            </select>
                         </div>
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th scope="col">Item Id</th>
+                                <th scope="col">Item Code</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Unit Price</th>
                                 <th scope="col">Qty</th>
@@ -407,5 +410,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="assets/script/script.js"></script>
 <script type="module" src="controller/customerController.js"></script>
+<script type="module" src="controller/itemController.js"></script>
 </body>
 </html>
