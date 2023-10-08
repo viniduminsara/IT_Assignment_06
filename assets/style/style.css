@@ -41,14 +41,15 @@ body{
     color: transparent;
     -webkit-background-clip: text;
     position: relative;
+    transition: all 0.8s ease;
 }
 
 .active-page:after{
     content: '';
     position: absolute;
-    left: 10%;
+    left: 20%;
     bottom: 0;
-    width: 80%;
+    width: 60%;
     height: 3px;
     background: var(--primary);
     border-radius: 30px;
@@ -132,6 +133,23 @@ section:first-child{
     margin-top: 100px;
 }
 
+th[scope = 'col']{
+    background: #2CC56F;
+    color: #ffffff;
+    text-align: center;
+}
+
+th[scope = 'col']:first-child{
+    border-radius: 15px 0 0 15px;
+}
+
+th[scope = 'col']:last-child{
+    border-radius: 0 15px 15px 0;
+}
+
+td, th[scope = 'row']{
+    text-align: center;
+}
 
 .search{
     position: relative;
@@ -153,10 +171,6 @@ section:first-child{
 .btn-primary{
     height: 50px;
 }
-
-/*#customer_search {*/
-/*    width: 100%;*/
-/*}*/
 
 #customer_search select{
     width: 125px;

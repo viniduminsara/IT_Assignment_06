@@ -54,24 +54,27 @@ customer_btn.eq(2).on('click', () => {
 //customer search
 customer_search.on('input', function() {
     let option = search_select.find(":selected").text();
-    let index = customer_db.findIndex(customer => customer[option] === customer_search.val().trim());
+    let searchTerm = customer_search.val().trim();
+    let matchingCustomers = customer_db.filter(customer => customer[option] === searchTerm);
 
-    if (index >= 0){
+    if (matchingCustomers.length > 0) {
         $('tbody').eq(0).empty();
-        $('tbody').eq(0).append(
-            `<tr>
-           <th scope="row">${customer_db[index].customer_id}</th>
-           <td>${customer_db[index].name}</td>
-           <td>${customer_db[index].address}</td>
-           <td>${customer_db[index].salary}</td>
-        </tr>`
-        );
-    }else{
+        matchingCustomers.forEach(customer => {
+            $('tbody').eq(0).append(
+                `<tr>
+                    <th scope="row">${customer.customer_id}</th>
+                    <td>${customer.name}</td>
+                    <td>${customer.address}</td>
+                    <td>${customer.salary}</td>
+                </tr>`
+            );
+        });
+    } else {
         loadCustomerTable();
     }
+});
 
-})
-
+//load customer
 $('tbody').eq(0).on('click', 'tr', function() {
     let customerId = $(this).find('th').eq(0).text();
     let index = customer_db.findIndex(customer => customer.customer_id === customerId);
@@ -82,6 +85,7 @@ $('tbody').eq(0).on('click', 'tr', function() {
     salary.val(customer_db[index].salary);
 });
 
+//load the customer table
 const loadCustomerTable = function () {
 
     $('tbody').eq(0).empty();
