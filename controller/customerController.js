@@ -19,9 +19,11 @@ customer_btn.eq(0).on('click', () => {
 
     let customer = new CustomerModel(customerId, fullName, addressVal, salaryVal);
 
-    customer_db.push(customer);
-    loadCustomerTable();
-    customer_btn.eq(3).click();
+    if (confirm('Are you want to add a customer ?')){
+        customer_db.push(customer);
+        loadCustomerTable();
+        customer_btn.eq(3).click();
+    }
 });
 
 //update customer
@@ -32,12 +34,18 @@ customer_btn.eq(1).on('click', () => {
     let salaryVal = salary.val().trim();
 
     let customer = new CustomerModel(customerId, fullName, addressVal,salaryVal);
-
     let index = customer_db.findIndex(customer => customer.customer_id === customerId);
-    customer_db[index] = customer;
 
-    loadCustomerTable();
-    customer_btn.eq(3).click();
+    if (index >= 0){
+        if (confirm(`Are you sure to update ${customerId} ?`)){
+            customer_db[index] = customer;
+
+            loadCustomerTable();
+            customer_btn.eq(3).click();
+        }
+    }else{
+        alert('Not found the customer :(');
+    }
 });
 
 //delete customer
@@ -45,10 +53,17 @@ customer_btn.eq(2).on('click', () => {
     let customerId = customer_Id.val().trim();
 
     let index = customer_db.findIndex(customer => customer.customer_id === customerId);
-    customer_db.splice(index, 1);
 
-    loadCustomerTable();
-    customer_btn.eq(3).click();
+    if (index >= 0){
+        if (confirm(`Are you want to delete ${customerId} ?`)){
+            customer_db.splice(index, 1);
+
+            loadCustomerTable();
+            customer_btn.eq(3).click();
+        }
+    }else{
+        alert('Not found the customer :(');
+    }
 });
 
 //customer search
