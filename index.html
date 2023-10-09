@@ -113,7 +113,7 @@
                         <form>
                             <div class="mb-3">
                                 <label for="customerId" class="form-label">Customer Id</label>
-                                <input type="number" class="form-control" id="customerId">
+                                <input type="text" class="form-control" id="customerId">
                             </div>
                             <div class="mb-3">
                                 <label for="fullname" class="form-label">Full Name</label>
@@ -178,7 +178,7 @@
                         <form>
                             <div class="mb-3">
                                 <label for="itemCode" class="form-label">Item Code</label>
-                                <input type="number" class="form-control" id="itemCode">
+                                <input type="text" class="form-control" id="itemCode">
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label">Description</label>
@@ -241,7 +241,7 @@
                         <form>
                             <div class="mb-3">
                                 <label for="orderId" class="form-label">Order ID</label>
-                                <input type="number" class="form-control" id="orderId">
+                                <input type="text" class="form-control" id="orderId">
                             </div>
                             <div class="mb-3">
                                 <label for="customer_Id" class="form-label">Customer Id</label>
@@ -301,7 +301,13 @@
                                 <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
                                     <div>
                                         <label for="order_Id" class="form-label">Order ID</label>
-                                        <input type="number" class="form-control" id="order_Id">
+                                        <input type="text" class="form-control" id="order_Id">
+                                    </div>
+                                </div>
+                                <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
+                                    <div>
+                                        <label for="orderDate" class="form-label">Date</label>
+                                        <input type="date" class="form-control" id="orderDate">
                                     </div>
                                 </div>
                                 <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
@@ -310,12 +316,6 @@
                                         <select class="form-select" aria-label="Default select example" id="custId">
                                             <option selected>select the customer</option>
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
-                                    <div>
-                                        <label for="orderDate" class="form-label">Date</label>
-                                        <input type="date" class="form-control" id="orderDate">
                                     </div>
                                 </div>
                             </div>
@@ -337,19 +337,23 @@
                                         <label for="qtyOnHand" class="form-label">Qty On Hand</label>
                                         <input type="number" class="form-control" id="qtyOnHand">
                                     </div>
+                                    <div>
+                                        <label for="order_quantity" class="form-label">Order Qty</label>
+                                        <input type="number" class="form-control" id="order_quantity">
+                                    </div>
                                 </div>
-                                <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="col col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column justify-content-between">
                                     <div>
                                         <label for="desc" class="form-label">Item Description</label>
                                         <input type="text" class="form-control" id="desc">
                                     </div>
                                     <div>
-                                        <label for="quantity" class="form-label">Qty</label>
+                                        <label for="quantity" class="form-label">Qty on Hand</label>
                                         <input type="number" class="form-control" id="quantity">
                                     </div>
-                                </div>
-                                <div class="row justify-content-end mt-3">
-                                    <button class="cart_btn">Add to Cart</button>
+                                    <div class="text-end">
+                                        <button class="cart_btn">Add to Cart</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -376,14 +380,20 @@
                     <div class="order_container mt-3">
                         <div class="container">
                             <div class="row">
-                                <div class="col">
-                                    <div>
-                                        <label for="discount" class="form-label">Discount</label>
-                                        <input type="number" class="form-control" id="discount">
-                                    </div>
+                                <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
                                     <div>
                                         <label for="cash" class="form-label">Cash</label>
                                         <input type="number" class="form-control" id="cash">
+                                    </div>
+                                    <div>
+                                        <label for="balance" class="form-label">Balance</label>
+                                        <input type="number" class="form-control" id="balance">
+                                    </div>
+                                </div>
+                                <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
+                                    <div>
+                                        <label for="discount" class="form-label">Discount</label>
+                                        <input type="number" class="form-control" id="discount">
                                     </div>
                                     <div class="net_total">
                                         <span>Net Total : </span>
