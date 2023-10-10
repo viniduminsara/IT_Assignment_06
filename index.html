@@ -9,7 +9,7 @@
         powerful backend capabilities, providing a seamless and efficient sales process. ">
     <meta name="author" content="Vinidu Minsara">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">-->
     <link rel="stylesheet" href="assets/style/style.css">
     <title>Web POS</title>
 </head>
@@ -230,70 +230,13 @@
     <!-- order section -->
     <section id="order">
         <div class="container">
-            <div class="row mb-5">
-                <div class="col">
-                    <h3 class="header">Manage Orders</h3>
-                </div>
-            </div>
-            <div class="order_container">
-                <div class="row">
-                    <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
-                        <form>
-                            <div class="mb-3">
-                                <label for="orderId" class="form-label">Order ID</label>
-                                <input type="text" class="form-control" id="orderId">
-                            </div>
-                            <div class="mb-3">
-                                <label for="customer_Id" class="form-label">Customer Id</label>
-                                <select class="form-select" aria-label="Default select example" id="customer_Id">
-                                    <option selected>select the customer</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="date" class="form-label">Date</label>
-                                <input type="date" class="form-control" id="date">
-                            </div>
-                            <div class="mt-5">
-                                <button type="button" class="btn btn-outline-warning">Update</button>
-                                <button type="button" class="btn btn-outline-danger">Delete</button>
-                                <button type="reset" class="btn btn-outline-secondary">Reset</button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="col col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column align-items-end">
-                        <div class="search mb-4 mt-4">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" class="form-control" placeholder="Search">
-                            <button class="btn btn-outline-primary" style="height: 50px">Search</button>
-                            <button class="btn btn-primary place_order" id="place_order_btn">Place Order</button>
-                        </div>
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th scope="col">Order Id</th>
-                                <th scope="col">Customer Id</th>
-                                <th scope="col">Date</th>
-                            </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- place order section -->
-    <section id="place_order">
-        <div class="container">
             <div class="row mb-4">
                 <div class="col">
                     <h3 class="header">Place Order</h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col-7 col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
                     <div class="order_container mt-3">
                         <div class="container">
                             <h4>Invoice Details</h4>
@@ -303,19 +246,21 @@
                                         <label for="order_Id" class="form-label">Order ID</label>
                                         <input type="text" class="form-control" id="order_Id">
                                     </div>
+                                    <div>
+                                        <label for="custId" class="form-label">Customer Id</label>
+                                        <select class="form-select" aria-label="Default select example" id="custId">
+                                            <option selected>select the customer</option>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
                                     <div>
                                         <label for="orderDate" class="form-label">Date</label>
                                         <input type="date" class="form-control" id="orderDate">
                                     </div>
-                                </div>
-                                <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
                                     <div>
-                                        <label for="custId" class="form-label">Customer Id</label>
-                                        <select class="form-select" aria-label="Default select example" id="custId">
-                                            <option selected>select the customer</option>
-                                        </select>
+                                        <label for="custName" class="form-label">Customer name</label>
+                                        <input type="text" class="form-control" id="custName">
                                     </div>
                                 </div>
                             </div>
@@ -342,14 +287,14 @@
                                         <input type="number" class="form-control" id="order_quantity">
                                     </div>
                                 </div>
-                                <div class="col col-lg-6 col-md-12 col-sm-12 col-12 d-flex flex-column justify-content-between">
+                                <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
                                     <div>
                                         <label for="desc" class="form-label">Item Description</label>
                                         <input type="text" class="form-control" id="desc">
                                     </div>
                                     <div>
-                                        <label for="quantity" class="form-label">Qty on Hand</label>
-                                        <input type="number" class="form-control" id="quantity">
+                                        <label for="unit_price" class="form-label">Unit Price</label>
+                                        <input type="number" class="form-control" id="unit_price">
                                     </div>
                                     <div class="text-end">
                                         <button class="cart_btn">Add to Cart</button>
@@ -360,7 +305,7 @@
                     </div>
                 </div>
 
-                <div class="col-5 col-lg-6 col-md-12 col-sm-12 col-12">
+                <div class="col col-lg-6 col-md-12 col-sm-12 col-12">
                     <div class="order_container mt-3">
                         <div class="container">
                             <h4>Cart</h4>
@@ -370,6 +315,7 @@
                                     <th scope="col">Item Id</th>
                                     <th scope="col">Unit Price</th>
                                     <th scope="col">Qty</th>
+                                    <th scope="col">Total</th>
                                 </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -417,9 +363,10 @@
 </main>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/jquery/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="assets/script/script.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>-->
+<script src="controller/indexController.js"></script>
 <script type="module" src="controller/customerController.js"></script>
 <script type="module" src="controller/itemController.js"></script>
+<script type="module" src="controller/orderController.js"></script>
 </body>
 </html>
