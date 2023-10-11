@@ -207,10 +207,6 @@ td, th[scope = 'row']{
     margin-top: 30px;
 }
 
-#discount, #cash{
-    width: fit-content;
-}
-
 .order_btn{
     background: #57cc99;
     color: #ffffff;

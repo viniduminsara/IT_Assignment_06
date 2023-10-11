@@ -16,7 +16,7 @@ customer_btn.eq(0).on('click', () => {
     let customerId = customer_Id.val().trim();
     let fullName = full_name.val().trim();
     let addressVal = address.val().trim();
-    let salaryVal = salary.val().trim();
+    let salaryVal = parseFloat(salary.val().trim());
 
     let customer = new CustomerModel(customerId, fullName, addressVal, salaryVal);
 
@@ -37,7 +37,7 @@ customer_btn.eq(1).on('click', () => {
     let customerId = customer_Id.val().trim();
     let fullName = full_name.val().trim();
     let addressVal = address.val().trim();
-    let salaryVal = salary.val().trim();
+    let salaryVal = parseFloat(salary.val().trim());
 
     let customer = new CustomerModel(customerId, fullName, addressVal,salaryVal);
     let index = getCustomerIndex(customerId);

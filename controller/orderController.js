@@ -11,9 +11,16 @@ const customer_name = $('#custName');
 const qty_on_hand = $('#qtyOnHand');
 const description = $('#desc');
 const unit_price = $('#unit_price');
+const net_total = $('.net_total span:nth-child(2)');
+const sub_total = $('.sub_total span:nth-child(2)');
+const discount = $('#discount');
 
 const cart_btn = $('.cart_btn');
 const order_btn = $('.order_btn');
+
+let cart = [];
+
+setItemIds();
 
 //generate orderId
 order_id.val(generateOrderId());
@@ -45,6 +52,10 @@ customer_id.on('input', () => {
     }
 });
 
+//set date
+const formattedDate = new Date().toISOString().substr(0, 10);
+date.val(formattedDate);
+
 //set item Ids
 export function setItemIds() {
     item_Id.empty();
@@ -75,6 +86,86 @@ item_Id.on('input', () => {
         qty_on_hand.val('');
     }
 });
+
+//add to cart
+cart_btn.on('click', () => {
+    let itemId = item_Id.val();
+    let index = item_db.findIndex(item => item.item_code === itemId);
+    let unitPrice = item_db[index].unit_price;
+    let orderQTY = parseInt(order_qty.val());
+    let total = unitPrice * orderQTY;
+
+    let cartItemIndex = cart.findIndex(cartItem => cartItem.itemId === itemId);
+    if (cartItemIndex < 0) {
+        let cart_item = {
+            itemId: itemId,
+            unitPrice: unitPrice,
+            qty: orderQTY,
+            total: total
+        }
+        cart.push(cart_item);
+        loadCart();
+        setTotalValues()
+        clearItemSection();
+    }else{
+        cart[cartItemIndex].qty += orderQTY;
+        cart[cartItemIndex].total = cart[cartItemIndex].qty * cart[cartItemIndex].unitPrice;
+        loadCart();
+        setTotalValues()
+        clearItemSection();
+    }
+});
+
+discount.on('input', () => {
+    let discountValue = parseFloat(discount.val()) || 0;
+    if (discountValue < 0 || discountValue > 100) {
+        discountValue = Math.min(100, Math.max(0, discountValue));
+        discount.val(discountValue);
+    }
+
+    let total_value = calculateTotal();
+    let discountAmount = (total_value * discountValue) / 100;
+    sub_total.text(`${total_value - discountAmount}/=`);
+});
+
+function loadCart() {
+    $('tbody').eq(2).empty();
+    cart.map((item) => {
+        $('tbody').eq(2).append(
+            `<tr>
+            <th scope="row">${item.itemId}</th>
+            <td>${item.unitPrice}</td>
+            <td>${item.qty}</td>
+            <td>${item.total}</td>
+        </tr>`
+        );
+    });
+}
+
+function calculateTotal(){
+    let netTotal = 0;
+    cart.map((cart_item) => {
+        netTotal += cart_item.total;
+    });
+    return netTotal;
+}
+
+function setTotalValues(){
+    let netTotal = calculateTotal();
+    net_total.text(`${netTotal}/=`);
+
+    let discount_percentage = discount.val() || 0;
+    let discountAmount = (netTotal * discount_percentage) / 100;
+    sub_total.text(`${netTotal - discountAmount}/=`);
+}
+
+function clearItemSection() {
+    item_Id.val('select the item');
+    description.val('');
+    qty_on_hand.val('');
+    unit_price.val('');
+    order_qty.val('');
+}
 
 function generateOrderId() {
     if (order_db.length > 0){

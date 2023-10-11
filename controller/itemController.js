@@ -15,8 +15,8 @@ const item_search_select = $('#item_search select');
 item_btns.eq(0).on('click', () => {
    let itemCode = item_Code.val().trim();
    let desc = description.val().trim();
-   let price = unit_price.val().trim();
-   let qty_val = qty.val();
+   let price = parseFloat(unit_price.val().trim());
+   let qty_val = parseInt(qty.val());
 
    let item = new ItemModel(itemCode, desc, price, qty_val);
 
@@ -36,8 +36,8 @@ item_btns.eq(0).on('click', () => {
 item_btns.eq(1).on('click', () => {
     let itemCode = item_Code.val().trim();
     let desc = description.val().trim();
-    let price = unit_price.val().trim();
-    let qty_val = qty.val();
+    let price = parseFloat(unit_price.val().trim());
+    let qty_val = parseInt(qty.val());
 
     let item = new ItemModel(itemCode, desc, price, qty_val);
 
@@ -120,6 +120,8 @@ const loadItemTable = function () {
         );
     });
 }
+
+loadItemTable();
 
 const getItemIndex = function (itemCode){
     return item_db.findIndex(item => item.item_code === itemCode);
