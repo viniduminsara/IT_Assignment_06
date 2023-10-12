@@ -20,8 +20,6 @@ const order_btn = $('.order_btn');
 
 let cart = [];
 
-setItemIds();
-
 //generate orderId
 order_id.val(generateOrderId());
 
@@ -95,26 +93,41 @@ cart_btn.on('click', () => {
     let orderQTY = parseInt(order_qty.val());
     let total = unitPrice * orderQTY;
 
-    let cartItemIndex = cart.findIndex(cartItem => cartItem.itemId === itemId);
-    if (cartItemIndex < 0) {
-        let cart_item = {
-            itemId: itemId,
-            unitPrice: unitPrice,
-            qty: orderQTY,
-            total: total
+    if (item_db[index].qty > orderQTY) {
+        let cartItemIndex = cart.findIndex(cartItem => cartItem.itemId === itemId);
+        if (cartItemIndex < 0) {
+            let cart_item = {
+                itemId: itemId,
+                unitPrice: unitPrice,
+                qty: orderQTY,
+                total: total
+            }
+            cart.push(cart_item);
+            loadCart();
+            setTotalValues()
+            clearItemSection();
+        } else {
+            cart[cartItemIndex].qty += orderQTY;
+            cart[cartItemIndex].total = cart[cartItemIndex].qty * cart[cartItemIndex].unitPrice;
+            loadCart();
+            setTotalValues()
+            clearItemSection();
         }
-        cart.push(cart_item);
-        loadCart();
-        setTotalValues()
-        clearItemSection();
     }else{
-        cart[cartItemIndex].qty += orderQTY;
-        cart[cartItemIndex].total = cart[cartItemIndex].qty * cart[cartItemIndex].unitPrice;
-        loadCart();
-        setTotalValues()
-        clearItemSection();
+        alert('not enough quantity available 😔');
     }
 });
+
+$('tbody').on('click', '.cart_remove', function() {
+    const itemId = $(this).data('id');
+    const index = cart.findIndex(cartItem => cartItem.itemId === itemId);
+    if (index !== -1) {
+        cart.splice(index, 1);
+        loadCart();
+        setTotalValues();
+    }
+});
+
 
 discount.on('input', () => {
     let discountValue = parseFloat(discount.val()) || 0;
@@ -133,11 +146,12 @@ function loadCart() {
     cart.map((item) => {
         $('tbody').eq(2).append(
             `<tr>
-            <th scope="row">${item.itemId}</th>
-            <td>${item.unitPrice}</td>
-            <td>${item.qty}</td>
-            <td>${item.total}</td>
-        </tr>`
+                <th scope="row">${item.itemId}</th>
+                <td>${item.unitPrice}</td>
+                <td>${item.qty}</td>
+                <td>${item.total}</td>
+                <td><button class="cart_remove" data-id="${item.itemId}">Remove</button></td>
+            </tr>`
         );
     });
 }
