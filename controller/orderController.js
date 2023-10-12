@@ -1,5 +1,6 @@
 import {OrderModel} from "../model/orderModel.js";
-import {customer_db, item_db, order_db} from "../db/db.js";
+import {customer_db, item_db, order_db, order_details_db} from "../db/db.js";
+import {OrderDetailModel} from "../model/orderDetailModel.js";
 
 const order_id = $('#order_Id');
 const customer_id = $('#custId');
@@ -14,6 +15,8 @@ const unit_price = $('#unit_price');
 const net_total = $('.net_total span:nth-child(2)');
 const sub_total = $('.sub_total span:nth-child(2)');
 const discount = $('#discount');
+const cash = $('#cash');
+const balance = $('#balance');
 
 const cart_btn = $('.cart_btn');
 const order_btn = $('.order_btn');
@@ -118,6 +121,30 @@ cart_btn.on('click', () => {
     }
 });
 
+order_btn.on('click', () => {
+    let orderId = order_id.val();
+    let order_date = date.val();
+    let customerId = customer_id.val();
+
+    //save order
+    let order = new OrderModel(orderId, order_date, customerId);
+    order_db.push(order);
+
+    //save order details
+    cart.forEach((cart_item) => {
+        let order_detail = new OrderDetailModel(orderId, cart_item.itemId, cart_item.qty);
+        order_details_db.push(order_detail);
+    });
+
+    order_id.val(generateOrderId());
+    cart.splice(0, cart.length);
+    loadCart();
+    clearItemSection();
+    customer_id.val('select the customer');
+    customer_name.val('');
+});
+
+//set cart remove button
 $('tbody').on('click', '.cart_remove', function() {
     const itemId = $(this).data('id');
     const index = cart.findIndex(cartItem => cartItem.itemId === itemId);
@@ -128,7 +155,7 @@ $('tbody').on('click', '.cart_remove', function() {
     }
 });
 
-
+//set sub total value
 discount.on('input', () => {
     let discountValue = parseFloat(discount.val()) || 0;
     if (discountValue < 0 || discountValue > 100) {
@@ -140,6 +167,31 @@ discount.on('input', () => {
     let discountAmount = (total_value * discountValue) / 100;
     sub_total.text(`${total_value - discountAmount}/=`);
 });
+
+//set balance
+cash.on('input', () => {
+    let subTotal = parseFloat(sub_total.text());
+    let cashAmount = parseFloat(cash.val());
+    balance.val(cashAmount - subTotal);
+});
+
+//search order
+order_id.on('input', () => {
+    let orderId = order_id.val().trim();
+    let index = order_db.findIndex(order => order.order_id === orderId);
+
+    if (index >= 0){
+        customer_id.val(order_db[index].customer_id);
+        date.val(order_db[index].date);
+    }else{
+        order_id.val(generateOrderId());
+        cart.splice(0, cart.length);
+        loadCart();
+        clearItemSection();
+        customer_id.val('select the customer');
+        customer_name.val('');
+    }
+})
 
 function loadCart() {
     $('tbody').eq(2).empty();
