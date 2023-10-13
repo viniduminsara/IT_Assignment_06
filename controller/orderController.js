@@ -121,6 +121,7 @@ cart_btn.on('click', () => {
     }
 });
 
+//place order
 order_btn.on('click', () => {
     let orderId = order_id.val();
     let order_date = date.val();
@@ -132,7 +133,7 @@ order_btn.on('click', () => {
 
     //save order details
     cart.forEach((cart_item) => {
-        let order_detail = new OrderDetailModel(orderId, cart_item.itemId, cart_item.qty);
+        let order_detail = new OrderDetailModel(orderId, cart_item.itemId, cart_item.qty, cart_item.unitPrice);
         order_details_db.push(order_detail);
     });
 
@@ -142,6 +143,8 @@ order_btn.on('click', () => {
     clearItemSection();
     customer_id.val('select the customer');
     customer_name.val('');
+
+    alert('order placed successfully 🥳');
 });
 
 //set cart remove button
@@ -177,13 +180,29 @@ cash.on('input', () => {
 
 //search order
 order_id.on('input', () => {
-    let orderId = order_id.val().trim();
-    let index = order_db.findIndex(order => order.order_id === orderId);
-
+    let orderId = order_id.val();
+    let index = order_db.findIndex(order => order.orderId === orderId);
     if (index >= 0){
-        customer_id.val(order_db[index].customer_id);
+        customer_id.val(order_db[index].customerId);
         date.val(order_db[index].date);
-    }else{
+
+        cart.splice(0, cart.length);
+        for(let i=0; i<order_details_db.length; i++){
+            if (orderId === order_details_db[i].order_id){
+                let total = order_details_db[i].unit_price * order_details_db[i].qty;
+
+                let cart_item = {
+                    itemId: order_details_db[i].item_id,
+                    unitPrice: order_details_db[i].unit_price,
+                    qty: order_details_db[i].qty,
+                    total: total
+                }
+                cart.push(cart_item);
+            }
+        }
+
+        loadCart();
+    }else if(order_id.val() === ''){
         order_id.val(generateOrderId());
         cart.splice(0, cart.length);
         loadCart();
@@ -191,7 +210,7 @@ order_id.on('input', () => {
         customer_id.val('select the customer');
         customer_name.val('');
     }
-})
+});
 
 function loadCart() {
     $('tbody').eq(2).empty();
