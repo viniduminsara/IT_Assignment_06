@@ -1,4 +1,7 @@
+import {customer_db, item_db, order_db} from "../db/db.js";
+
 // navigation
+
 $('#customer').css('display','none');
 $('#item').css('display','none');
 $('#order').css('display','none');
@@ -97,3 +100,13 @@ const myChart = new Chart(ctx, {
     options: options
 });
 myChart.update();
+
+const count = $('.count');
+
+export function setCounts(){
+    count.eq(0).text(customer_db.length);
+    count.eq(1).text(item_db.length);
+    count.eq(2).text(order_db.length);
+}
+
+setCounts();

@@ -1,6 +1,7 @@
 import {CustomerModel} from "../model/customerModel.js";
 import {customer_db} from "../db/db.js";
-import {setCustomerIds} from "./orderController.js"
+import {setCustomerIds} from "./orderController.js";
+import {setCounts} from "./indexController.js";
 
 //customer form
 const customer_Id = $('#customerId');
@@ -26,6 +27,7 @@ customer_btn.eq(0).on('click', () => {
             loadCustomerTable();
             customer_btn.eq(3).click();
             setCustomerIds();
+            setCounts();
         }
     }else{
         alert('Customer is already exists 😊');
@@ -64,6 +66,7 @@ customer_btn.eq(2).on('click', () => {
             loadCustomerTable();
             customer_btn.eq(3).click();
             setCustomerIds();
+            setCounts();
         }
     }else{
         alert('Customer did not exists 😓');

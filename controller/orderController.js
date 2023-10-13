@@ -1,6 +1,7 @@
 import {OrderModel} from "../model/orderModel.js";
 import {customer_db, item_db, order_db, order_details_db} from "../db/db.js";
 import {OrderDetailModel} from "../model/orderDetailModel.js";
+import {setCounts} from "./indexController.js";
 
 const order_id = $('#order_Id');
 const customer_id = $('#custId');
@@ -143,6 +144,7 @@ order_btn.on('click', () => {
     clearItemSection();
     customer_id.val('select the customer');
     customer_name.val('');
+    setCounts();
 
     alert('order placed successfully 🥳');
 });

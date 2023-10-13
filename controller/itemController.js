@@ -1,6 +1,7 @@
 import {ItemModel} from "../model/itemModel.js";
 import {item_db} from "../db/db.js";
 import {setItemIds} from "./orderController.js";
+import {setCounts} from "./indexController.js";
 
 //item form
 const item_Code = $('#itemCode');
@@ -26,6 +27,7 @@ item_btns.eq(0).on('click', () => {
            loadItemTable();
            item_btns.eq(3).click();
            setItemIds();
+           setCounts();
        }
    }else{
        alert('Item is already exists 😊');
@@ -66,6 +68,7 @@ item_btns.eq(2).on('click', () => {
             loadItemTable();
             item_btns.eq(3).click();
             setItemIds();
+            setCounts();
         }
     }else{
         alert('Item did not exists 😓');
