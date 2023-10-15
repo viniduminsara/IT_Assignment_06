@@ -153,10 +153,12 @@ order_btn.on('click', () => {
 $('tbody').on('click', '.cart_remove', function() {
     const itemId = $(this).data('id');
     const index = cart.findIndex(cartItem => cartItem.itemId === itemId);
-    if (index !== -1) {
-        cart.splice(index, 1);
-        loadCart();
-        setTotalValues();
+    if (confirm(`Are you sure to remove ${itemId} from cart ?`)) {
+        if (index !== -1) {
+            cart.splice(index, 1);
+            loadCart();
+            setTotalValues();
+        }
     }
 });
 

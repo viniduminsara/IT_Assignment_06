@@ -12,6 +12,10 @@ const customer_btn = $('#customer_btn button');
 const  customer_search = $('#customer_search input');
 const  customer_search_select = $('#customer_search select');
 
+let lastCustomerId = 0;
+
+customer_Id.val(generateCustomerId());
+
 //add customer
 customer_btn.eq(0).on('click', () => {
     let customerId = customer_Id.val().trim();
@@ -19,18 +23,38 @@ customer_btn.eq(0).on('click', () => {
     let addressVal = address.val().trim();
     let salaryVal = parseFloat(salary.val().trim());
 
-    let customer = new CustomerModel(customerId, fullName, addressVal, salaryVal);
+    if (validate(customerId,'customer Id') && validate(fullName,'full name') &&
+        validate(addressVal,'address') && validate(salaryVal,'salary')) {
 
-    if (getCustomerIndex(customerId) < 0){
-        if (confirm('Are you want to add a customer ?')){
-            customer_db.push(customer);
-            loadCustomerTable();
-            customer_btn.eq(3).click();
-            setCustomerIds();
-            setCounts();
+        let customer = new CustomerModel(customerId, fullName, addressVal, salaryVal);
+
+        if (getCustomerIndex(customerId) < 0) {
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    customer_db.push(customer);
+                    loadCustomerTable();
+                    customer_btn.eq(3).click();
+                    customer_Id.val(generateCustomerId());
+                    setCustomerIds();
+                    setCounts();
+
+                    Swal.fire('Customer Saved!', '', 'success');
+
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Customer is already exists 😔',
+            });
         }
-    }else{
-        alert('Customer is already exists 😊');
     }
 });
 
@@ -41,17 +65,37 @@ customer_btn.eq(1).on('click', () => {
     let addressVal = address.val().trim();
     let salaryVal = parseFloat(salary.val().trim());
 
-    let customer = new CustomerModel(customerId, fullName, addressVal,salaryVal);
-    let index = getCustomerIndex(customerId);
+    if (validate(customerId,'customer Id') && validate(fullName,'full name') &&
+        validate(addressVal,'address') && validate(salaryVal,'salary')) {
 
-    if (index >= 0){
-        if (confirm(`Are you sure to update ${customerId} ?`)){
-            customer_db[index] = customer;
-            loadCustomerTable();
-            customer_btn.eq(3).click();
+        let customer = new CustomerModel(customerId, fullName, addressVal, salaryVal);
+        let index = getCustomerIndex(customerId);
+
+        if (index >= 0) {
+            Swal.fire({
+                title: 'Do you want to update the customer?',
+                showDenyButton: true,
+                confirmButtonText: 'Update',
+                denyButtonText: `Don't update`,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    customer_db[index] = customer;
+                    loadCustomerTable();
+                    customer_btn.eq(3).click();
+                    customer_Id.val(generateCustomerId());
+
+                    Swal.fire('Customer Updated!', '', 'success');
+
+                } else if (result.isDenied) {
+                    Swal.fire('Changes are not updated!', '', 'info')
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Customer did not exists 😓',
+            });
         }
-    }else{
-        alert('Customer did not exists 😓');
     }
 });
 
@@ -60,16 +104,35 @@ customer_btn.eq(2).on('click', () => {
     let customerId = customer_Id.val().trim();
     let index = getCustomerIndex(customerId);
 
-    if (index >= 0){
-        if (confirm(`Are you sure to delete ${customerId} ?`)){
-            customer_db.splice(index, 1);
-            loadCustomerTable();
-            customer_btn.eq(3).click();
-            setCustomerIds();
-            setCounts();
+    if (validate(customerId, 'customer Id')) {
+
+        if (index >= 0) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    customer_db.splice(index, 1);
+                    loadCustomerTable();
+                    customer_btn.eq(3).click();
+                    customer_Id.val(generateCustomerId());
+                    setCustomerIds();
+                    setCounts();
+
+                    Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Customer did not exists 😓',
+            });
         }
-    }else{
-        alert('Customer did not exists 😓');
     }
 });
 
@@ -126,4 +189,29 @@ const loadCustomerTable = function () {
 
 const getCustomerIndex = function (customerId) {
     return customer_db.findIndex(customer => customer.customer_id === customerId);
+}
+
+function generateCustomerId(){
+    lastCustomerId++;
+
+    if (lastCustomerId < 10){
+        return `O-00${lastCustomerId}`;
+    } else if (lastCustomerId < 100){
+        return `O-0${lastCustomerId}`;
+    } else {
+        return `O-${lastCustomerId}`;
+    }
+}
+
+
+
+function validate(value, field_name){
+    if (!value){
+        Swal.fire({
+            icon: 'warning',
+            title: `Please enter the ${field_name}!`
+        });
+        return false;
+    }
+    return true;
 }
