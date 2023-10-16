@@ -102,9 +102,9 @@ customer_btn.eq(1).on('click', () => {
 //delete customer
 customer_btn.eq(2).on('click', () => {
     let customerId = customer_Id.val().trim();
-    let index = getCustomerIndex(customerId);
 
     if (validate(customerId, 'customer Id')) {
+        let index = getCustomerIndex(customerId);
 
         if (index >= 0) {
             Swal.fire({
@@ -192,18 +192,18 @@ const getCustomerIndex = function (customerId) {
 }
 
 function generateCustomerId(){
-    lastCustomerId++;
+    let lastId = 'O-001'; // Default if array is empty
 
-    if (lastCustomerId < 10){
-        return `O-00${lastCustomerId}`;
-    } else if (lastCustomerId < 100){
-        return `O-0${lastCustomerId}`;
-    } else {
-        return `O-${lastCustomerId}`;
+    if (customer_db.length > 0){
+        let lastElement = customer_db[customer_db.length - 1].customer_id;
+        let lastIdParts = lastElement.split('-');
+        let lastNumber = parseInt(lastIdParts[1]);
+
+        lastId = `O-${String(lastNumber + 1).padStart(3, '0')}`;
     }
+
+    return lastId;
 }
-
-
 
 function validate(value, field_name){
     if (!value){
