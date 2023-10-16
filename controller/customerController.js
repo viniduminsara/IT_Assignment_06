@@ -12,8 +12,6 @@ const customer_btn = $('#customer_btn button');
 const  customer_search = $('#customer_search input');
 const  customer_search_select = $('#customer_search select');
 
-let lastCustomerId = 0;
-
 customer_Id.val(generateCustomerId());
 
 //add customer
