@@ -92,33 +92,40 @@ item_Id.on('input', () => {
 //add to cart
 cart_btn.on('click', () => {
     let itemId = item_Id.val();
-    let index = item_db.findIndex(item => item.item_code === itemId);
-    let unitPrice = item_db[index].unit_price;
     let orderQTY = parseInt(order_qty.val());
-    let total = unitPrice * orderQTY;
 
-    if (item_db[index].qty > orderQTY) {
-        let cartItemIndex = cart.findIndex(cartItem => cartItem.itemId === itemId);
-        if (cartItemIndex < 0) {
-            let cart_item = {
-                itemId: itemId,
-                unitPrice: unitPrice,
-                qty: orderQTY,
-                total: total
+    if (validate(itemId, 'item id') && validate(orderQTY, 'order qty')) {
+
+        let index = item_db.findIndex(item => item.item_code === itemId);
+        let unitPrice = item_db[index].unit_price;
+        let total = unitPrice * orderQTY;
+
+        if (item_db[index].qty >= orderQTY) {
+            let cartItemIndex = cart.findIndex(cartItem => cartItem.itemId === itemId);
+            if (cartItemIndex < 0) {
+                let cart_item = {
+                    itemId: itemId,
+                    unitPrice: unitPrice,
+                    qty: orderQTY,
+                    total: total
+                }
+                cart.push(cart_item);
+                loadCart();
+                setTotalValues()
+                clearItemSection();
+            } else {
+                cart[cartItemIndex].qty += orderQTY;
+                cart[cartItemIndex].total = cart[cartItemIndex].qty * cart[cartItemIndex].unitPrice;
+                loadCart();
+                setTotalValues()
+                clearItemSection();
             }
-            cart.push(cart_item);
-            loadCart();
-            setTotalValues()
-            clearItemSection();
         } else {
-            cart[cartItemIndex].qty += orderQTY;
-            cart[cartItemIndex].total = cart[cartItemIndex].qty * cart[cartItemIndex].unitPrice;
-            loadCart();
-            setTotalValues()
-            clearItemSection();
+            Swal.fire({
+                icon: 'error',
+                title: 'not enough quantity available 😔',
+            });
         }
-    }else{
-        alert('not enough quantity available 😔');
     }
 });
 
@@ -128,38 +135,58 @@ order_btn.on('click', () => {
     let order_date = date.val();
     let customerId = customer_id.val();
 
-    //save order
-    let order = new OrderModel(orderId, order_date, customerId);
-    order_db.push(order);
+    if (validate(orderId, 'order id') && validate(order_date, 'order date') &&
+    validate(customerId, 'customer id')) {
+        if (cart.length !== 0) {
 
-    //save order details
-    cart.forEach((cart_item) => {
-        let order_detail = new OrderDetailModel(orderId, cart_item.itemId, cart_item.qty, cart_item.unitPrice);
-        order_details_db.push(order_detail);
-    });
+            //save order
+            let order = new OrderModel(orderId, order_date, customerId);
+            order_db.push(order);
 
-    order_id.val(generateOrderId());
-    cart.splice(0, cart.length);
-    loadCart();
-    clearItemSection();
-    customer_id.val('select the customer');
-    customer_name.val('');
-    setCounts();
+            //save order details
+            cart.forEach((cart_item) => {
+                let order_detail = new OrderDetailModel(orderId, cart_item.itemId, cart_item.qty, cart_item.unitPrice);
+                order_details_db.push(order_detail);
+            });
 
-    alert('order placed successfully 🥳');
+            order_id.val(generateOrderId());
+            cart.splice(0, cart.length);
+            loadCart();
+            clearItemSection();
+            customer_id.val('select the customer');
+            customer_name.val('');
+            setCounts();
+            Swal.fire('Order Placed! 🥳','', 'success');
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Please add items to cart 😔',
+            });
+        }
+    }
 });
 
 //set cart remove button
 $('tbody').on('click', '.cart_remove', function() {
     const itemId = $(this).data('id');
     const index = cart.findIndex(cartItem => cartItem.itemId === itemId);
-    if (confirm(`Are you sure to remove ${itemId} from cart ?`)) {
-        if (index !== -1) {
-            cart.splice(index, 1);
-            loadCart();
-            setTotalValues();
+    Swal.fire({
+        title: `Are you sure to remove ${itemId} from cart ?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            if (index !== -1) {
+                cart.splice(index, 1);
+                loadCart();
+                setTotalValues();
+            }
+            Swal.fire('Deleted!', '', 'success');
         }
-    }
+    });
 });
 
 //set sub total value
@@ -256,11 +283,44 @@ function clearItemSection() {
     order_qty.val('');
 }
 
-function generateOrderId() {
-    if (order_db.length > 0){
-        return `O-00${order_db.length + 1}`;
-    }else{
-        return 'O-001';
+function generateOrderId(){
+    let lastId = 'O-001'; // Default if array is empty
+
+    if (customer_db.length > 0){
+        let lastElement = order_db[order_db.length - 1].orderId;
+        let lastIdParts = lastElement.split('-');
+        let lastNumber = parseInt(lastIdParts[1]);
+
+        lastId = `O-${String(lastNumber + 1).padStart(3, '0')}`;
     }
+
+    return lastId;
+}
+
+function validate(value, field_name){
+    if (field_name === 'item id'){
+        if (value === 'select the item'){
+            Swal.fire({
+                icon: 'warning',
+                title: `Please select an item!`
+            });
+            return false;
+        }
+    }else if (field_name === 'customer id'){
+        if (value === 'select the customer'){
+            Swal.fire({
+                icon: 'warning',
+                title: `Please select a customer!`
+            });
+            return false;
+        }
+    }else if (!value){
+        Swal.fire({
+            icon: 'warning',
+            title: `Please enter the ${field_name}!`
+        });
+        return false;
+    }
+    return true;
 }
 

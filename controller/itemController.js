@@ -191,23 +191,6 @@ const getItemIndex = function (itemCode){
 }
 
 function validate(value, field_name){
-
-    if (field_name === 'unit price' && value <= 0) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Unit price must be a positive number!'
-        });
-        return false;
-    }
-
-    if (field_name === 'qty on hand' && !Number.isInteger(value) && value >= 0) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Quantity on hand must be a non-negative integer!'
-        });
-        return false;
-    }
-
     if (!value){
         Swal.fire({
             icon: 'warning',

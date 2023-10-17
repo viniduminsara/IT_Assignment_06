@@ -190,14 +190,14 @@ const getCustomerIndex = function (customerId) {
 }
 
 function generateCustomerId(){
-    let lastId = 'O-001'; // Default if array is empty
+    let lastId = 'C-001'; // Default if array is empty
 
     if (customer_db.length > 0){
         let lastElement = customer_db[customer_db.length - 1].customer_id;
         let lastIdParts = lastElement.split('-');
         let lastNumber = parseInt(lastIdParts[1]);
 
-        lastId = `O-${String(lastNumber + 1).padStart(3, '0')}`;
+        lastId = `C-${String(lastNumber + 1).padStart(3, '0')}`;
     }
 
     return lastId;
