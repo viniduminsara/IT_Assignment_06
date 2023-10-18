@@ -2,6 +2,7 @@ import {OrderModel} from "../model/orderModel.js";
 import {customer_db, item_db, order_db, order_details_db} from "../db/db.js";
 import {OrderDetailModel} from "../model/orderDetailModel.js";
 import {setCounts} from "./indexController.js";
+import {loadOrderTable} from "./orderDetailController.js";
 
 const order_id = $('#order_Id');
 const customer_id = $('#custId');
@@ -138,25 +139,38 @@ order_btn.on('click', () => {
     if (validate(orderId, 'order id') && validate(order_date, 'order date') &&
     validate(customerId, 'customer id')) {
         if (cart.length !== 0) {
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            }).then((result) => {
+                if (result.isConfirmed) {
 
-            //save order
-            let order = new OrderModel(orderId, order_date, customerId);
-            order_db.push(order);
+                    //save order
+                    let order = new OrderModel(orderId, order_date, customerId);
+                    order_db.push(order);
 
-            //save order details
-            cart.forEach((cart_item) => {
-                let order_detail = new OrderDetailModel(orderId, cart_item.itemId, cart_item.qty, cart_item.unitPrice);
-                order_details_db.push(order_detail);
+                    //save order details
+                    cart.forEach((cart_item) => {
+                        let order_detail = new OrderDetailModel(orderId, cart_item.itemId, cart_item.qty, cart_item.unitPrice);
+                        order_details_db.push(order_detail);
+                    });
+
+                    order_id.val(generateOrderId());
+                    cart.splice(0, cart.length);
+                    loadCart();
+                    clearItemSection();
+                    customer_id.val('select the customer');
+                    customer_name.val('');
+                    setCounts();
+                    loadOrderTable();
+                    Swal.fire('Order Placed! 🥳','', 'success');
+
+                } else if (result.isDenied) {
+                    Swal.fire('Order is not saved', '', 'info');
+                }
             });
-
-            order_id.val(generateOrderId());
-            cart.splice(0, cart.length);
-            loadCart();
-            clearItemSection();
-            customer_id.val('select the customer');
-            customer_name.val('');
-            setCounts();
-            Swal.fire('Order Placed! 🥳','', 'success');
         }else{
             Swal.fire({
                 icon: 'error',

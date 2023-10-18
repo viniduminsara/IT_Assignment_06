@@ -389,11 +389,6 @@
                                 <label for="order_details_date" class="form-label">Order Date</label>
                                 <input type="date" class="form-control" id="order_details_date">
                             </div>
-                            <div id="order_detail_btn" class="mt-5">
-                                <button type="button" class="btn btn-outline-warning">Update</button>
-                                <button type="button" class="btn btn-outline-danger">Delete</button>
-                                <button type="reset" class="btn btn-outline-secondary">Reset</button>
-                            </div>
                         </form>
                     </div>
 
@@ -420,12 +415,13 @@
                 </div>
             </div>
 
-            <div class="order_container mt-5">
+            <div class="order_container mt-3">
                 <div class="row">
                     <table class="table table-hover">
                         <thead>
                         <tr>
                             <th scope="col">Item Id</th>
+                            <th scope="col">Description</th>
                             <th scope="col">Unit Price</th>
                             <th scope="col">Qty</th>
                             <th scope="col">Total</th>
@@ -446,5 +442,6 @@
 <script type="module" src="controller/customerController.js"></script>
 <script type="module" src="controller/itemController.js"></script>
 <script type="module" src="controller/orderController.js"></script>
+<script type="module" src="controller/orderDetailController.js"></script>
 </body>
 </html>
