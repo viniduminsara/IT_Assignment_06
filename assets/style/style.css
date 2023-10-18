@@ -245,6 +245,10 @@ td, th[scope = 'row']{
     .image-class{
         display: none;
     }
+
+    .active-page:after{
+        width: 0;
+    }
 }
 
 @media all and (max-width: 576px) {

@@ -163,6 +163,11 @@ order_btn.on('click', () => {
                     clearItemSection();
                     customer_id.val('select the customer');
                     customer_name.val('');
+                    discount.val('');
+                    cash.val('');
+                    balance.val('');
+                    net_total.text('0/=');
+                    sub_total.text('0/=');
                     setCounts();
                     loadOrderTable();
                     Swal.fire('Order Placed! 🥳','', 'success');

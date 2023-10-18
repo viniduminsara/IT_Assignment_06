@@ -1,4 +1,4 @@
-import {item_db, order_db, order_details_db} from "../db/db.js";
+import {customer_db, item_db, order_db, order_details_db} from "../db/db.js";
 
 const order_id = $('#order_detail_id');
 const customer_id = $('#order_detail_customer_id');
@@ -14,6 +14,28 @@ $('tbody').eq(3).on('click', 'tr', function() {
     customer_id.val($(this).find('td').eq(0).text());
     date.val($(this).find('td').eq(1).text());
     loadOrderDetails();
+});
+
+//search order
+order_search.on('input', function (){
+    let option = order_search_option.find(":selected").text();
+    let searchTerm = order_search.val().trim();
+    let matchingOrders = order_db.filter(order => order[option] === searchTerm);
+
+    if (matchingOrders.length > 0) {
+        $('tbody').eq(3).empty();
+        matchingOrders.forEach(order => {
+            $('tbody').eq(3).append(
+                `<tr>
+                <th scope="row">${order.orderId}</th>
+                <td>${order.customerId}</td>
+                <td>${order.date}</td>
+             </tr>`
+            );
+        });
+    }else{
+        loadOrderTable();
+    }
 });
 
 function loadOrderDetails() {
