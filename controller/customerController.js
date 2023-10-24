@@ -137,8 +137,8 @@ customer_btn.eq(2).on('click', () => {
 //customer search
 customer_search.on('input', function() {
     let option = customer_search_select.find(":selected").text();
-    let searchTerm = customer_search.val().trim();
-    let matchingCustomers = customer_db.filter(customer => customer[option] === searchTerm);
+    let searchTerm = customer_search.val().trim().toLowerCase();
+    let matchingCustomers = customer_db.filter(customer => customer[option].toLowerCase() === searchTerm);
 
     if (matchingCustomers.length > 0) {
         $('tbody').eq(0).empty();

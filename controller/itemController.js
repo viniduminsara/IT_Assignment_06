@@ -138,8 +138,8 @@ item_btns.eq(2).on('click', () => {
 //item search
 item_search.on('input', function (){
     let option = item_search_select.find(':selected').text();
-    let searchTerm = item_search.val().trim();
-    let matchingItems = item_db.filter(item => item[option] === searchTerm);
+    let searchTerm = item_search.val().trim().toLowerCase();
+    let matchingItems = item_db.filter(item => item[option].toLowerCase() === searchTerm);
 
     if (matchingItems.length > 0){
         $('tbody').eq(1).empty();
