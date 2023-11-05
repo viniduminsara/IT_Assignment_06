@@ -170,7 +170,7 @@ $('tbody').eq(1).on('click', 'tr', function() {
 });
 
 //load the item table
-const loadItemTable = function () {
+export const loadItemTable = function () {
     $('tbody').eq(1).empty();
     item_db.map((index) => {
         $('tbody').eq(1).append(

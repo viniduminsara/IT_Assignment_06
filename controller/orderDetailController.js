@@ -3,6 +3,7 @@ import {item_db, order_db, order_details_db} from "../db/db.js";
 const order_id = $('#order_detail_id');
 const customer_id = $('#order_detail_customer_id');
 const date = $('#order_details_date');
+const discount = $('#order_details_discount');
 const order_search = $('#order_detail_search input');
 const order_search_option = $('#order_detail_search select');
 
@@ -44,6 +45,7 @@ function loadOrderDetails() {
     if (index >= 0){
         customer_id.val(order_db[index].customerId);
         date.val(order_db[index].date);
+        discount.val(order_db[index].discount);
 
         $('tbody').eq(4).empty();
         for(let i=0; i<order_details_db.length; i++){
@@ -77,6 +79,7 @@ export function loadOrderTable(){
                 <th scope="row">${order.orderId}</th>
                 <td>${order.customerId}</td>
                 <td>${order.date}</td>
+                <td>Rs. ${order.subTotal}</td>
              </tr>`
         )
     })

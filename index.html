@@ -300,7 +300,7 @@
                                         <input type="number" class="form-control" id="unit_price">
                                     </div>
                                     <div class="text-end">
-                                        <button class="cart_btn">Add to Cart</button>
+                                        <button class="cart_btn"><i class="fa-solid fa-plus fa-lg m-2"></i>Add to Cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -354,8 +354,8 @@
                                         <span>0/=</span>
                                     </div>
                                 </div>
-                                <div class="row justify-content-center mt-3">
-                                    <button class="order_btn">Place Order</button>
+                                <div class="row justify-content-center mt-3 d-flex">
+                                    <button class="order_btn"><i class="fa-solid fa-cart-shopping fa-lg m-3"></i>Place Order</button>
                                 </div>
                             </div>
                         </div>
@@ -389,6 +389,10 @@
                                 <label for="order_details_date" class="form-label">Order Date</label>
                                 <input type="date" class="form-control" id="order_details_date">
                             </div>
+                            <div class="mb-3">
+                                <label for="order_details_discount" class="form-label">Discount</label>
+                                <input type="text" class="form-control" id="order_details_discount">
+                            </div>
                         </form>
                     </div>
 
@@ -407,6 +411,7 @@
                                 <th scope="col">Order Id</th>
                                 <th scope="col">Customer Id</th>
                                 <th scope="col">Date</th>
+                                <th scope="col">Total</th>
                             </tr>
                             </thead>
                             <tbody></tbody>
@@ -434,14 +439,19 @@
         </div>
     </section>
 </main>
+
+<!-- js libraries -->
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/jquery/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+
+<!-- controllers -->
 <script type="module" src="controller/indexController.js"></script>
 <script type="module" src="controller/customerController.js"></script>
 <script type="module" src="controller/itemController.js"></script>
 <script type="module" src="controller/orderController.js"></script>
 <script type="module" src="controller/orderDetailController.js"></script>
+
 </body>
 </html>

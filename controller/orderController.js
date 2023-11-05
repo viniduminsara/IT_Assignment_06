@@ -3,6 +3,7 @@ import {customer_db, item_db, order_db, order_details_db} from "../db/db.js";
 import {OrderDetailModel} from "../model/orderDetailModel.js";
 import {setCounts} from "./indexController.js";
 import {loadOrderTable} from "./orderDetailController.js";
+import {loadItemTable} from "./itemController.js";
 
 const order_id = $('#order_Id');
 const customer_id = $('#custId');
@@ -135,51 +136,66 @@ order_btn.on('click', () => {
     let orderId = order_id.val();
     let order_date = date.val();
     let customerId = customer_id.val();
+    let subTotal = parseFloat(sub_total.text());
+    let cashAmount = parseFloat(cash.val());
+    let discountValue = parseFloat(discount.val()) || 0;
 
     if (validate(orderId, 'order id') && validate(order_date, 'order date') &&
     validate(customerId, 'customer id')) {
-        if (cart.length !== 0) {
-            Swal.fire({
-                title: 'Do you want to save the changes?',
-                showDenyButton: true,
-                confirmButtonText: 'Save',
-                denyButtonText: `Don't save`,
-            }).then((result) => {
-                if (result.isConfirmed) {
+        if (cashAmount >= subTotal) {
+            if (cart.length !== 0) {
+                Swal.fire({
+                    title: 'Do you want to save the changes?',
+                    showDenyButton: true,
+                    confirmButtonText: 'Save',
+                    denyButtonText: `Don't save`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
 
-                    //save order
-                    let order = new OrderModel(orderId, order_date, customerId);
-                    order_db.push(order);
+                        //save order
+                        let order = new OrderModel(orderId, order_date, customerId, subTotal, discountValue);
+                        order_db.push(order);
 
-                    //save order details
-                    cart.forEach((cart_item) => {
-                        let order_detail = new OrderDetailModel(orderId, cart_item.itemId, cart_item.qty, cart_item.unitPrice);
-                        order_details_db.push(order_detail);
-                    });
+                        //save order details
+                        cart.forEach((cart_item) => {
+                            let order_detail = new OrderDetailModel(orderId, cart_item.itemId, cart_item.qty, cart_item.unitPrice);
+                            order_details_db.push(order_detail);
 
-                    order_id.val(generateOrderId());
-                    cart.splice(0, cart.length);
-                    loadCart();
-                    clearItemSection();
-                    customer_id.val('select the customer');
-                    customer_name.val('');
-                    discount.val('');
-                    cash.val('');
-                    balance.val('');
-                    net_total.text('0/=');
-                    sub_total.text('0/=');
-                    setCounts();
-                    loadOrderTable();
-                    Swal.fire('Order Placed! 🥳','', 'success');
+                            //update item qty
+                            let index = item_db.findIndex(item => item.item_code === cart_item.itemId);
+                            item_db[index].qty -= cart_item.qty;
+                        });
 
-                } else if (result.isDenied) {
-                    Swal.fire('Order is not saved', '', 'info');
-                }
-            });
-        }else{
+                        order_id.val(generateOrderId());
+                        cart.splice(0, cart.length);
+                        loadCart();
+                        clearItemSection();
+                        loadItemTable();
+                        customer_id.val('select the customer');
+                        customer_name.val('');
+                        discount.val('');
+                        cash.val('');
+                        balance.val('');
+                        net_total.text('0/=');
+                        sub_total.text('0/=');
+                        setCounts();
+                        loadOrderTable();
+                        Swal.fire('Order Placed! 🥳', '', 'success');
+
+                    } else if (result.isDenied) {
+                        Swal.fire('Order is not saved', '', 'info');
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please add items to cart 😔',
+                });
+            }
+        } else {
             Swal.fire({
                 icon: 'error',
-                title: 'Please add items to cart 😔',
+                title: 'Payment not settled 🤨',
             });
         }
     }
@@ -219,14 +235,17 @@ discount.on('input', () => {
     let total_value = calculateTotal();
     let discountAmount = (total_value * discountValue) / 100;
     sub_total.text(`${total_value - discountAmount}/=`);
+    setBalance();
 });
 
 //set balance
-cash.on('input', () => {
+function setBalance(){
     let subTotal = parseFloat(sub_total.text());
     let cashAmount = parseFloat(cash.val());
     balance.val(cashAmount - subTotal);
-});
+}
+
+cash.on('input', () => setBalance());
 
 //search order
 order_id.on('input', () => {
